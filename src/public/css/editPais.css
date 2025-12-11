@@ -1,0 +1,369 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #667eea;
+    min-height: 100vh;
+    color: #333;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Contenedor principal */
+.contenedor {
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+.header {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    background: #667eea;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.boton-header {
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+}
+
+.boton-header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(149, 165, 166, 0.4);
+}
+
+/* Contenedor del formulario */
+.contenedor-formulario {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Grupos del formulario */
+.form-grupo {
+    margin-bottom: 30px;
+}
+
+.form-grupo label {
+    display: block;
+    color: #667eea;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.form-grupo input[type="text"],
+.form-grupo input[type="number"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9ff;
+}
+
+.form-grupo input[type="text"]:focus,
+.form-grupo input[type="number"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.texto-ayuda {
+    color: #999;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.error-mensaje {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    font-weight: 600;
+    display: none;
+}
+
+.error-mensaje:not(:empty) {
+    display: block;
+}
+
+/* Arrays dinámicos */
+.array-capital,
+.array-lenguajes,
+.array-zonasHorarias,
+.array-paisesVecinos {
+    margin-bottom: 15px;
+}
+
+.array-input-grupo {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.array-input-grupo input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: #f8f9ff;
+    transition: all 0.3s ease;
+}
+
+.array-input-grupo input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.boton-remover {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    white-space: nowrap;
+}
+
+.boton-remover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+}
+
+.boton-añadir-item {
+    padding: 12px 25px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.boton-añadir-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Selectores de zona horaria */
+.select-signo,
+.select-hora {
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background: #f8f9ff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    font-weight: 500;
+}
+
+.select-signo:focus,
+.select-hora:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.select-signo:hover,
+.select-hora:hover {
+    border-color: #667eea;
+}
+
+.select-signo {
+    min-width: 90px;
+}
+
+.select-hora {
+    min-width: 110px;
+}
+
+/* Responsive para selectores */
+@media (max-width: 480px) {
+    .select-signo,
+    .select-hora {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Acciones del formulario */
+.accionForm {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.boton-cancelar,
+.boton-editar {
+    flex: 1;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+}
+
+.boton-cancelar {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(149, 165, 166, 0.3);
+}
+
+.boton-cancelar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(149, 165, 166, 0.4);
+}
+
+.boton-editar {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.boton-editar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .contenedor-formulario {
+        padding: 25px;
+    }
+    
+    .accionForm {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .header {
+        padding: 25px;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .contenedor-formulario {
+        padding: 20px;
+    }
+    
+    .array-input-grupo {
+        flex-direction: column;
+    }
+    
+    .array-input-grupo input {
+        width: 100%;
+    }
+    
+    .boton-remover {
+        width: 100%;
+    }
+}
+
+/* Estilos para inputs con error */
+.input-error {
+    border: 2px solid #ef4444 !important;
+    background-color: #fef2f2 !important;
+}
+
+.input-error:focus {
+    outline: none;
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+/* Mensaje de error */
+.error-msg {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Opcional: animación para el error */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.input-error {
+    animation: shake 0.3s ease-in-out;
+}

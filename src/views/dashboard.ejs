@@ -1,0 +1,301 @@
+<!-- ICONO -->
+<link rel="shortcut icon" href="/icons/dashboard.svg" type="image/x-icon" />
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="p-8 max-w-7xl mx-auto">
+  <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">
+    Dashboard de Países
+  </h1>
+  <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+    <div class="flex justify-between items-center">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-900">Dashboard de Países</h1>
+        <p class="text-gray-600 mt-2">Países de América con idioma español</p>
+      </div>
+      <div class="flex gap-3">
+        <button
+          onclick="exportarCSV()"
+          class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-semibold shadow-lg transform hover:scale-105 transition-all duration-300"
+        >
+          📥 Exportar CSV
+        </button>
+        <div class="text-right">
+          <div class="text-4xl font-bold text-blue-600">
+            <%= paises.length %>
+          </div>
+          <div class="text-gray-600">Total de Países</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if (paises.length === 0) { %>
+
+  <div
+    class="text-center bg-gray-100 p-6 rounded-lg shadow-sm border border-gray-200"
+  >
+    <p class="text-gray-600 text-lg">No hay países cargados</p>
+  </div>
+
+  <% } else { %>
+
+  <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
+    <table class="min-w-full divide-y divide-gray-300 text-sm">
+      <thead class="bg-gray-50">
+        <tr class="text-gray-700 uppercase text-xs tracking-wider">
+          <th class="px-3 py-2 text-left">País</th>
+          <th class="px-3 py-2 text-left">Nombre Oficial</th>
+          <th class="px-3 py-2 text-left">Capital</th>
+          <th class="px-3 py-2 text-left">Población</th>
+          <th class="px-3 py-2 text-left">Gini</th>
+          <th class="px-3 py-2 text-left">Región</th>
+          <th class="px-3 py-2 text-left">Subregión</th>
+          <th class="px-3 py-2 text-left">Lenguajes</th>
+          <th class="px-3 py-2 text-left">Lat/Long</th>
+          <th class="px-3 py-2 text-left">Área</th>
+          <th class="px-3 py-2 text-left">Zonas Horarias</th>
+          <th class="px-3 py-2 text-left">Frontera</th>
+          <th class="px-3 py-2 text-left">Creador</th>
+          <th class="px-3 py-2 text-left">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody class="divide-y divide-gray-200 bg-white" id="tabla-body">
+        <% paises.forEach(pais => { %>
+        <tr class="hover:bg-gray-50">
+          <td class="px-3 py-2 font-medium text-gray-900"><%= pais.pais %></td>
+          <td class="px-3 py-2"><%= pais.nombreOficial %></td>
+
+          <td class="px-3 py-2">
+            <% pais.capital.forEach(c => { %>
+            <span
+              class="px-2 py-1 bg-gray-200 text-gray-700 rounded text-xs inline-block mb-1"
+              ><%= c %></span
+            >
+            <% }) %>
+          </td>
+
+          <td class="px-3 py-2"><%= pais.habitantes.toLocaleString() %></td>
+
+          <td class="px-3 py-2"><%= pais.gini ?? "—" %></td>
+          <td class="px-3 py-2"><%= pais.region %></td>
+          <td class="px-3 py-2"><%= pais.subRegion %></td>
+
+          <td class="px-3 py-2">
+            <% pais.lenguajes.forEach(l => { %>
+            <span
+              class="px-2 py-1 bg-gray-200 text-gray-700 rounded text-xs inline-block mb-1"
+              ><%= l %></span
+            >
+            <% }) %>
+          </td>
+
+          <td class="px-3 py-2">
+            <% pais.latitudLongitud.forEach(ll => { %>
+            <span
+              class="px-2 py-1 bg-gray-200 text-gray-700 rounded text-xs inline-block mb-1"
+              ><%= ll %></span
+            >
+            <% }) %>
+          </td>
+
+          <td class="px-3 py-2"><%= pais.area.toLocaleString() %></td>
+
+          <td class="px-3 py-2">
+            <% pais.zonasHorarias.forEach(z => { %>
+            <span
+              class="px-2 py-1 bg-gray-200 text-gray-700 rounded text-xs inline-block mb-1"
+              ><%= z %></span
+            >
+            <% }) %>
+          </td>
+
+          <td class="px-3 py-2">
+            <% if (pais.paisesVecinos.length > 0) { %> <%
+            pais.paisesVecinos.forEach(v => { %>
+            <span
+              class="px-2 py-1 bg-gray-200 text-gray-700 rounded text-xs inline-block mb-1"
+              ><%= v %></span
+            >
+            <% }) %> <% } else { %>
+            <span class="text-gray-400 text-sm">Sin datos</span>
+            <% } %>
+          </td>
+          <td class="px-3 py-2 text-gray-700"><%= pais.creador || "—" %></td>
+
+          <td class="px-3 py-2">
+            <div class="flex gap-2">
+              <a
+                href="/api/editar/<%= pais._id %>"
+                class="px-3 py-1 text-xs border border-blue-600 text-blue-600 rounded hover:bg-blue-600 hover:text-white transition"
+              >
+                Editar
+              </a>
+
+              <button
+                onclick="confirmarEliminacion('<%= pais._id %>', '<%= pais.pais %>')"
+                class="px-3 py-1 text-xs border border-red-600 text-red-600 rounded hover:bg-red-600 hover:text-white transition"
+              >
+                Eliminar
+              </button>
+            </div>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+      <tfoot id="fila-totales">
+        <tr class="bg-gray-100 font-semibold text-gray-900">
+          <td class="px-3 py-2">Totales</td>
+          <td></td>
+          <td></td>
+
+          <td id="total-population" class="px-3 py-2"></td>
+          <td id="promedio-gini" class="px-3 py-2"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td id="total-area" class="px-3 py-2"></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- PAGINACIÓN -->
+  <div class="mt-6 flex justify-between items-center">
+    <p class="text-gray-600 text-sm">
+      Mostrando <span id="info-ini">1</span> - <span id="info-fin">10</span> de
+      <%= paises.length %>
+    </p>
+
+    <div class="flex gap-1" id="pagination-container"></div>
+  </div>
+
+  <% } %>
+</div>
+
+<script>
+    window.paises = <%- JSON.stringify(paises) %>;
+
+
+    function exportarCSV() {
+      // Obtener todos los países desde el servidor
+      const paises = <%- JSON.stringify(paises) %>;
+
+      if (paises.length === 0) {
+          alert('No hay datos para exportar');
+          return;
+      }
+
+      // Encabezados del CSV
+      const headers = [
+          'País',
+          'Nombre Oficial',
+          'Capital',
+          'Población',
+          'Gini',
+          'Región',
+          'Subregión',
+          'Lenguajes',
+          'Latitud',
+          'Longitud',
+          'Área (km²)',
+          'Zonas Horarias',
+          'Fronteras',
+          'Creador'
+      ];
+
+      // Crear el contenido CSV
+      let csvContent = headers.join(',') + '\n';
+
+      paises.forEach(pais => {
+          // Escapar comillas y comas
+          const escapar = (texto) => {
+              if (texto === null || texto === undefined) return '';
+              texto = String(texto).replace(/"/g, '""');
+              if (texto.includes(',') || texto.includes('\n') || texto.includes('"')) {
+                  return `"${texto}"`;
+              }
+              return texto;
+          };
+
+          // Extraer campos según tu modelo
+          const nombrePais = pais.pais || '';
+          const nombreOficial = pais.nombreOficial || '';
+          const capital = Array.isArray(pais.capital) ? pais.capital.join(', ') : '';
+          const poblacion = pais.habitantes || '';
+          const gini = pais.gini || '';
+          const region = pais.region || '';
+          const subregion = pais.subRegion || '';
+
+          // Lenguajes (array)
+          const lenguajes = Array.isArray(pais.lenguajes) ? pais.lenguajes.join('; ') : '';
+
+          // Coordenadas
+          const latitud = Array.isArray(pais.latitudLongitud) && pais.latitudLongitud[0] ? pais.latitudLongitud[0] : '';
+          const longitud = Array.isArray(pais.latitudLongitud) && pais.latitudLongitud[1] ? pais.latitudLongitud[1] : '';
+
+          const area = pais.area || '';
+
+          // Zonas horarias (array)
+          const zonasHorarias = Array.isArray(pais.zonasHorarias) ? pais.zonasHorarias.join('; ') : '';
+
+          // Fronteras (array)
+          const fronteras = Array.isArray(pais.paisesVecinos) ? pais.paisesVecinos.join('; ') : '';
+
+          const creador = pais.creador || '';
+
+          // Crear fila del CSV
+          const fila = [
+              escapar(nombrePais),
+              escapar(nombreOficial),
+              escapar(capital),
+              escapar(poblacion),
+              escapar(gini),
+              escapar(region),
+              escapar(subregion),
+              escapar(lenguajes),
+              escapar(latitud),
+              escapar(longitud),
+              escapar(area),
+              escapar(zonasHorarias),
+              escapar(fronteras),
+              escapar(creador)
+          ].join(',');
+
+          csvContent += fila + '\n';
+      });
+
+      // Crear blob y descargar
+      const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      const fecha = new Date().toISOString().split('T')[0];
+
+      link.setAttribute('href', url);
+      link.setAttribute('download', `paises_america_completo_${fecha}.csv`);
+      link.style.visibility = 'hidden';
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Confirmación
+      if (typeof Swal !== 'undefined') {
+          Swal.fire({
+              icon: 'success',
+              title: '¡CSV Exportado!',
+              text: `Se exportaron ${paises.length} países con toda la información`,
+              timer: 2000,
+              timerProgressBar: true
+          });
+      } else {
+          alert(`✅ Se exportaron ${paises.length} países al archivo CSV`);
+      }
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/dashboard.js"></script>

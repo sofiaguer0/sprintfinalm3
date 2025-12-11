@@ -1,0 +1,194 @@
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="max-w-4xl mx-auto p-8">
+  <h1 class="text-3xl font-bold mb-4">Agregar País</h1>
+
+  <div class="bg-white shadow p-8 rounded-xl">
+    <form id="paisForm" class="space-y-6">
+      <!-- Nombre país -->
+      <div>
+        <label class="font-semibold">Nombre del país</label>
+        <input
+          type="text"
+          id="nombrePais"
+          name="nombrePais"
+          class="w-full p-2 border rounded-lg"
+        />
+      </div>
+
+      <!-- Nombre oficial -->
+      <div>
+        <label class="font-semibold">Nombre oficial</label>
+        <input
+          type="text"
+          id="nombreOficial"
+          name="nombreOficial"
+          class="w-full p-2 border rounded-lg"
+        />
+      </div>
+
+      <!-- Capital -->
+      <div>
+        <label class="font-semibold">Capital</label>
+        <div id="capitalContenedor" class="space-y-2"></div>
+
+        <button
+          type="button"
+          onclick="añadirItem('capital')"
+          class="mt-2 px-3 py-1 bg-blue-600 text-white rounded-lg"
+        >
+          + Agregar Capital
+        </button>
+      </div>
+
+      <!-- Habitantes -->
+      <div>
+        <label class="font-semibold">Habitantes</label>
+        <input
+          type="number"
+          id="habitantes"
+          name="habitantes"
+          class="w-full p-2 border rounded-lg"
+        />
+      </div>
+
+      <!-- Gini -->
+      <div>
+        <label class="font-semibold">Gini</label>
+        <input
+          type="number"
+          id="gini"
+          name="gini"
+          step="any"
+          class="w-full p-2 border rounded-lg"
+        />
+      </div>
+
+      <!-- Región -->
+      <div>
+        <label class="font-semibold">Región</label>
+        <input
+          type="text"
+          id="region"
+          name="region"
+          class="w-full p-2 border rounded-lg"
+        />
+      </div>
+
+      <!-- Subregión -->
+      <div>
+        <label class="font-semibold">Subregión</label>
+        <input
+          type="text"
+          id="subregion"
+          name="subregion"
+          class="w-full p-2 border rounded-lg"
+        />
+      </div>
+
+      <!-- Lenguajes -->
+      <div>
+        <label class="font-semibold">Lenguajes</label>
+        <div id="lenguajesContenedor" class="space-y-2"></div>
+
+        <button
+          type="button"
+          onclick="añadirItem('lenguajes')"
+          class="mt-2 px-3 py-1 bg-blue-600 text-white rounded-lg"
+        >
+          + Agregar Lenguaje
+        </button>
+      </div>
+
+      <!-- Latitud / Longitud -->
+      <div>
+        <label class="font-semibold">Latitud y Longitud</label>
+        <div class="flex gap-4">
+          <input
+            type="number"
+            id="latitud"
+            name="latitud"
+            step="any"
+            class="w-full p-2 border rounded-lg"
+            placeholder="Latitud"
+          />
+          <input
+            type="number"
+            id="longitud"
+            name="longitud"
+            step="any"
+            class="w-full p-2 border rounded-lg"
+            placeholder="Longitud"
+          />
+        </div>
+      </div>
+
+      <!-- Área -->
+      <div>
+        <label class="font-semibold">Área</label>
+        <input
+          type="number"
+          id="area"
+          name="area"
+          class="w-full p-2 border rounded-lg"
+        />
+      </div>
+
+      <!-- Zonas Horarias -->
+      <div>
+        <label class="font-semibold">Zonas horarias</label>
+        <div id="zonasHorariasContenedor" class="space-y-2"></div>
+
+        <button
+          type="button"
+          onclick="añadirItem('zonasHorarias')"
+          class="mt-2 px-3 py-1 bg-blue-600 text-white rounded-lg"
+        >
+          + Agregar zona horaria
+        </button>
+      </div>
+
+      <!-- Países vecinos -->
+      <div>
+        <label class="font-semibold">Países vecinos</label>
+        <div id="paisesVecinosContenedor" class="space-y-2"></div>
+
+        <button
+          type="button" name="paisesVecinos[]"
+          onclick="añadirItem('paisesVecinos')"
+          class="mt-2 px-3 py-1 bg-blue-600 text-white rounded-lg"
+        >
+          + Agregar país vecino
+        </button>
+      </div>
+
+      <!-- Creador -->
+      <div>
+        <label class="font-semibold">Creador</label>
+        <input
+          type="text"
+          id="creador"
+          name="creador"
+          class="w-full p-2 border rounded-lg"
+        />
+      </div>
+
+      <!-- Botones -->
+      <div class="flex justify-between mt-8">
+        <a href="/api/dashboard" class="px-4 py-2 bg-gray-300 rounded-lg">
+          Cancelar
+        </a>
+
+        <button
+          type="submit"
+          class="boton-agregar px-6 py-2 bg-green-600 text-white rounded-lg"
+        >
+          Crear País
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/addPais.js"></script>

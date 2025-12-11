@@ -1,0 +1,130 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="shortcut icon" href="/icons/home.svg" type="image/x-icon" />
+
+<div class="min-h-screen bg-gray-100 p-10 flex flex-col items-center">
+  <!-- HERO -->
+  <section class="text-center max-w-3xl mb-12">
+    <h1 class="text-4xl font-extrabold text-gray-800 mb-4">
+      Registro de Países 🌍
+    </h1>
+    <p class="text-lg text-gray-600">
+      Estadísticas generales, información y datos interesantes sobre países del
+      mundo.
+    </p>
+
+    <button
+      id="boton-cargar-api"
+      class="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-lg rounded-xl shadow transition"
+    >
+      Cargar API
+    </button>
+  </section>
+
+  <% if (paises && paises.length > 0) { %>
+
+  <!-- ESTADÍSTICAS DESTACADAS -->
+  <section
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl"
+  >
+    <!-- Pais más poblado -->
+    <% const paisPoblado = paises.reduce((a,b)=> a.habitantes > b.habitantes ? a
+    : b); %>
+    <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+      <h2 class="text-xl font-semibold text-gray-700 mb-2">Más Habitantes</h2>
+      <p class="text-2xl font-bold text-gray-900"><%= paisPoblado.pais %></p>
+      <p class="text-gray-600">
+        <strong>Habitantes:</strong> <%= paisPoblado.habitantes %>
+      </p>
+      <p class="text-gray-600">
+        <strong>Oficial:</strong> <%= paisPoblado.nombreOficial %>
+      </p>
+      <a
+        href="/api/dashboard"
+        class="block mt-3 text-blue-600 font-medium hover:underline"
+        >Ver en dashboard →</a
+      >
+    </div>
+
+    <!-- Más vecinos -->
+    <% const paisVecinos = paises.reduce((a,b)=> a.paisesVecinos.length >
+    b.paisesVecinos.length ? a : b); %>
+    <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+      <h2 class="text-xl font-semibold text-gray-700 mb-2">Más Vecinos</h2>
+      <p class="text-2xl font-bold text-gray-900"><%= paisVecinos.pais %></p>
+      <p class="text-gray-600">
+        <strong>Total:</strong> <%= paisVecinos.paisesVecinos.length %>
+      </p>
+
+      <div class="flex flex-wrap gap-1 mt-2">
+        <% paisVecinos.paisesVecinos.forEach(v => { %>
+        <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs"
+          ><%= v %></span
+        >
+        <% }) %>
+      </div>
+
+      <a
+        href="/api/dashboard"
+        class="block mt-3 text-blue-600 font-medium hover:underline"
+        >Ver en dashboard →</a
+      >
+    </div>
+
+    <!-- Más lenguajes -->
+    <% const paisLenguajes = paises.reduce((a,b)=> (a.lenguajes?.length || 0) >
+    (b.lenguajes?.length || 0) ? a : b ); %>
+    <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+      <h2 class="text-xl font-semibold text-gray-700 mb-2">Más Lenguajes</h2>
+      <p class="text-2xl font-bold text-gray-900"><%= paisLenguajes.pais %></p>
+      <p class="text-gray-600">
+        <strong>Total:</strong> <%= paisLenguajes.lenguajes?.length || 0 %>
+      </p>
+
+      <div class="flex flex-wrap gap-1 mt-2">
+        <% paisLenguajes.lenguajes?.forEach(l => { %>
+        <span class="bg-purple-100 text-purple-600 px-2 py-1 rounded text-xs"
+          ><%= l %></span
+        >
+        <% }) %>
+      </div>
+
+      <a
+        href="/api/dashboard"
+        class="block mt-3 text-blue-600 font-medium hover:underline"
+        >Ver en dashboard →</a
+      >
+    </div>
+
+    <!-- Mayor área -->
+    <% const paisArea = paises.reduce((a,b)=> a.area > b.area ? a : b); %>
+    <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+      <h2 class="text-xl font-semibold text-gray-700 mb-2">Mayor Área</h2>
+      <p class="text-2xl font-bold text-gray-900"><%= paisArea.pais %></p>
+      <p class="text-gray-600">
+        <strong>Área:</strong> <%= paisArea.area %> km²
+      </p>
+      <a
+        href="/api/dashboard"
+        class="block mt-3 text-blue-600 font-medium hover:underline"
+        >Ver en dashboard →</a
+      >
+    </div>
+  </section>
+
+  <% } else { %>
+
+  <p class="text-gray-600 mt-12 text-lg">No hay países cargados todavía.</p>
+
+  <% } %>
+
+  <!-- ESTADÍSTICAS GENERALES -->
+  <section class="mt-12 w-full max-w-4xl grid grid-cols-1 gap-6 text-center">
+    <div class="bg-blue-600 text-white p-6 rounded-xl shadow text-center">
+      <p class="text-5xl font-bold"><%= paises.length %></p>
+      <p class="text-lg mt-2">Total de países cargados</p>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/index.js"></script>
