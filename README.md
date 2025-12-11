@@ -18,7 +18,7 @@ Aplicación web para gestionar información de países americanos que hablan esp
 ## 🛠️ Tecnologías Utilizadas
 
 ### Backend
-- **Node.js** - Entorno de ejecución
+- **Node.js** - Entorno de ejecución 
 - **Express.js** - Framework web
 - **MongoDB** - Base de datos NoSQL
 - **Mongoose** - ODM (Modelo de Datos Orientado a Objetos) para MongoDB
